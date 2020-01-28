@@ -1,0 +1,55 @@
+<header class="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col my-auto">
+                <div class="header-content mx-auto">
+                    <check if="{{@result != ''}}">
+                        <true>
+                            <div style="margin-top: 50px">
+                                <h3>You find {{ @count.total_users }} users.</h3>
+                            </div>
+                            <repeat group="{{ @result}}" value="{{ @user }}">
+                                    <div class="result" id="result" style="display: none">
+                                        <check if="{{ @user.images }}">
+                                            <true>
+                                                <img style="max-width: 50px; border-radius: 24px;" alt="no images" src="../../ui/img_profil/{{ @user.images}}">
+                                            </true>
+                                            <false>
+                                                <i class="fas fa-3x fa-user-circle"></i>
+                                            </false>
+                                        </check>
+                                        <a href="../../profile/{{ @user.username}}">{{ @user.username }}</a>
+                                        <span>{{ @user.age}} years old</span><br><br>
+                                    </div>
+                                </repeat>
+                            <a href="#" id="loadMore">Load More</a>
+                        </true>
+                        <false>
+                            <p style="margin-top: 100px">No result :(</p>
+                        </false>
+                    </check>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    $(function () {
+        $(".result").slice(0, 10).show();
+
+        var first_height = $(".masthead").height();
+        console.log(first_height);
+
+        $("#loadMore").on('click', function (e) {
+            e.preventDefault();
+            var height = $(".masthead").height();
+
+            height += first_height + 10;
+            $(".masthead").css({"height": height});
+            $(".result:hidden").slice(0, 10).slideDown();
+            $('html,body').animate({
+                scrollTop: $(this).offset().top
+            }, 1500);
+        });
+    });
+</script>

@@ -1,0 +1,146 @@
+<header class="masthead">
+	<div class="container h-100">
+		<div class="row h-100">
+			<div class="col-lg-7 my-auto">
+				<div class="header-content mx-auto">
+					<h1>Complete your profile</h1>
+					<form method="POST" action="../../buildProfile">
+						<div class="form-group">
+							<label for="gender">Gender</label>
+							<select class="form-control" name="gender" id="gender" autocomplete="sex">
+								<option value="male" {{ @male }}>Male</option>
+								<option value="female" {{ @female }}>Female</option>
+								<option value="other" {{ @other }}>Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="orientation">Orientation</label>
+							<select class="form-control" name="orientation" id="orientation">
+								<option value="straight" {{ @straight }}>Straight</option>
+								<option value="gay" {{ @gay }}>Gay</option>
+								<option value="bi" {{ @bi }}>Bi</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="birthdate">Birthdate</label>
+							<br>
+							<input id="birthdate" type="date" name="birthdate" placeholder="Your birthdate" required="" value="{{@birthdate}}">
+						</div>
+						<div class="form-group">
+							<textarea  class="form-control" rows="2" cols="50" name="bio" >{{@bio}}</textarea>
+						</div>
+						<div class="form-group">
+							<textarea  class="form-control" rows="4" cols="50" name="char" >{{@characteristics}}</textarea>
+						</div>
+						<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="buildProfile">
+					</form>			
+					<form action="../../uploadPhotoProfile" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="file_choose1">Upload your pictures</label>
+							<input id="file_choose1" type="file" name="File">
+						</div>
+						<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" value="Upload" name="UploadProfileOther">
+					</form>
+				</div>
+			</div>
+			<div class="col my-auto">
+				<check if="{{ @display_none == 'true' }} ">
+					<false>
+						<form method="POST" action="../../updateFirstName">
+							<div class="form-group">
+								<label for="first_name">First name</label>
+								<input id="first_name" class="form-control" type="text" name="FirstName" placeholder="Current first name" value="{{ @first_name }}">
+							</div>
+							<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="updateFirstName" value="Update First Name">
+						</form>
+						<form method="POST" action="../../updateLastName">
+							<div class="form-group">
+								<label for="last_name">Last name</label>
+								<input id="last_name" class="form-control" type="text" name="LastName" placeholder="Current last name" value="{{ @last_name }}">
+							</div>
+							<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="updateLastName" value="Update Last Name">
+						</form>
+
+						<form action="../../uploadPhotoProfile" method="post" enctype="multipart/form-data">
+							<label for="file_choose">Upload your profile picture</label>
+							<div class="form-group">
+								<input lass="form-control" id="file_choose" type="file" name="File">
+							</div>
+							<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" value="Upload" name="UploadProfile">
+						</form>
+					</false>
+				</check>
+			</div>
+
+		</div>
+	</div>
+</header>
+
+<section class="download bg-primary text-center" id="download">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 mx-auto">
+				<h2>Change your password</h2>
+				<form method="POST" action="../../updatePassword">
+					<div style="display: none">
+						<input type="text" class="form-control" name="username" id="username" placeholder="Username" autocomplete="username">
+					</div>
+
+					<div class="form-group">
+						<input class="form-control" type="password" name="currentpassword" placeholder="Current password" autocomplete="current-password">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="password" name="newpassword" placeholder="New password" autocomplete="new-password">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="password" name="newpassword_confirm" placeholder="New password confirm" autocomplete="new-password">
+					</div>
+					<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="updatePassword" value="Update Password">
+				</form>
+
+				<h2>Change your email</h2>
+				<form method="POST" action="../../updateEmail">
+					<div class="form-group">
+						<input class="form-control" type="email" name="currentemail" placeholder="Current email" autocomplete="email">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="email" name="newemail" placeholder="New email" autocomplete="email">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="email" name="newemail_confirm" placeholder="New email confirm" autocomplete="email">
+					</div>
+					<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="updateEmail" value="Update Email">
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="bg-secondary">
+	<div class="container">
+		<div class="section-heading text-center">
+			<button  class="mb-2 btn btn-outline btn-xl js-scroll-trigger" onclick="fsetGeo()">Locate Me</button>
+			<form name="geo" action="../../map" method="POST">
+				<input type="hidden" name="latitude" value="">
+				<input type="hidden" name="longitude" value="">
+				<input type="submit" name="set" value="set localisation" style="display: none">
+			</form>
+		</div>
+	</div>
+</section>
+<script>
+	function fsetGeo() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				let pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				$.ajax({
+					url: '../../map',
+					type: 'POST',
+					data: {'longitude': pos.lng, 'latitude': pos.lat}
+				});
+			});
+		}
+	}
+</script>

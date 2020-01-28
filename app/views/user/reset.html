@@ -1,0 +1,25 @@
+<header class="masthead">
+	<div class="container h-100">
+		<div class="row h-100">
+			<div class="col-lg-7 my-auto">
+				<div class="header-content mx-auto">
+					<h1 class="mb-5">Choose a new password</h1>
+					<p>Password should be at least 8 characters in length and should include at least one upper case letter and one number.</p><br>
+				</div>
+			</div>
+			<div class="col my-auto">
+				<form action="../../resetPassword" method="POST">
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input class="form-control" type="password" autocomplete="password" name="password" placeholder="Password" id="password">
+					</div>
+					<div class="form-group">
+						<label for="password_confirm">Confirm password</label>
+						<input class="form-control" autocomplete="password" type="password" name="password_confirm" placeholder="Confirm Password" id="password_confirm">
+					</div>
+					<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="resetPassword" value="Set New Password"><br>
+				</form>
+			</div>
+		</div>
+	</div>
+</header>

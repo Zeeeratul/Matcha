@@ -1,0 +1,64 @@
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-7 my-auto">
+                <div class="header-content mx-auto">
+                    <h1 class="mb-5">Matcha is an app that will help you find love !</h1>
+                </div>
+            </div>
+            <div class="col my-auto">
+                <form action="../../create" method="POST">
+                    <h3 class="mb-2">Member Login</h3>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <check if="{{ @error.usernameAlreadyUse == 1}} ">
+                            <true>
+                                <p>Username already taken</p>
+                            </true>
+                        </check>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <check if="{{ @error.emailAlreadyUse == 1}} ">
+                            <true>
+                                <p>Email already in use, please login.</p>
+                            </true>
+                        </check>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required autocomplete="given-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required autocomplete="family-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label><br>
+                        <check if="{{ @error.passwordNotSecure == 1}} ">
+                            <true>
+                                <p>Password should be at least 8 characters in length and should include at least one upper case letter, one number.</p><br>
+                            </true>
+                            <false>
+                                <small>Password should be at least 8 characters in length and should include at least one upper case letter, one number.</small><br>
+                            </false>
+                        </check>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirm">Verif Password</label>
+                        <check if="{{ @error.passwordNotMatch == 1}} ">
+                            <true>
+                                <p>Password does not match.</p>
+                            </true>
+                        </check>
+                        <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="Password" required autocomplete="new-password">
+                    </div>
+                    <input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="create" value="Register"><br>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>

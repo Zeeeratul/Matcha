@@ -1,0 +1,108 @@
+<header class="masthead">
+	<div class="container h-100">
+		<div class="row h-100">
+			<div class="col-lg-7 my-auto">
+				<div class="header-content mx-auto">
+					<h1>Find your soul mate</h1>
+					<form method="POST" action="../../searchSoulMate">
+
+						<div class="slidecontainer form-group">
+							<label for="minAge">Min age : <span id="min_age_value"></span></label>
+							<input type="range" min="16" max="100" value="18" class="custom-range" id="minAge" name="age_min">
+						</div>
+						<script>
+							var sliderMinAge = document.getElementById("minAge");
+							var outputMinAge = document.getElementById("min_age_value");
+							outputMinAge.innerHTML = sliderMinAge.value;
+
+							sliderMinAge.oninput = function() {
+								outputMinAge.innerHTML = this.value;
+							}
+						</script>
+						<div class="slidecontainer form-group">
+							<label for="maxAge">Max age : <span id="max_age_value"></span></label>
+							<input type="range" min="18" max="100" value="50" class="custom-range" id="maxAge" name="age_max">
+						</div>
+						<script>
+							var slider = document.getElementById("maxAge");
+							var output = document.getElementById("max_age_value");
+							output.innerHTML = slider.value;
+
+							slider.oninput = function() {
+								output.innerHTML = this.value;
+							}
+						</script>
+						<div class="slidecontainer form-group">
+							<label for="public_score_min">Public score min : <span id="public_score_min_value"></span></label>
+							<input type="range" min="1" max="200" value="1" class="custom-range" id="public_score_min" name="public_score_min">
+						</div>
+						<script>
+							var slider_public_score_min = document.getElementById("public_score_min");
+							var output_public_score_min = document.getElementById("public_score_min_value");
+							output_public_score_min.innerHTML = slider_public_score_min.value;
+
+							slider_public_score_min.oninput = function() {
+								output_public_score_min.innerHTML = this.value;
+							}
+						</script>
+						<div class="slidecontainer form-group">
+							<label for="public_score_max">Public score max : <span id="public_score_max_value"></span></label>
+							<input type="range" min="1" max="200" value="200" class="custom-range" id="public_score_max" name="public_score_max">
+						</div>
+						<script>
+							var slider_public_score_max = document.getElementById("public_score_max");
+							var output_public_score_max = document.getElementById("public_score_max_value");
+							output_public_score_max.innerHTML = slider_public_score_max.value;
+
+							slider_public_score_max.oninput = function() {
+								output_public_score_max.innerHTML = this.value;
+							}
+						</script>
+						<div class="form-group">
+							<input class="form-control" type="text" name="tag" placeholder="Characteristics">
+						</div>
+						<div class="slidecontainer form-group">
+							<label for="km">How far ? <span id="km_value"></span> km</label>
+							<input type="range" min="0" max="500" value="50" class="custom-range" id="km" name="km">
+						</div>
+						<script>
+							var sliderKm = document.getElementById("km");
+							var outputKm = document.getElementById("km_value");
+							outputKm.innerHTML = sliderKm.value;
+
+							sliderKm.oninput = function() {
+								outputKm.innerHTML = this.value;
+							}
+						</script>
+						<div class="form-group">
+							<label for="order">Order by :</label>
+
+							<select id="order" class="form-control" name="order">
+								<option value="popularity">Popularity</option>
+								<option value="birthday">Age</option>
+								<option value="geo">Localisation</option>
+							</select>
+						</div>
+						<input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="searchSoulMate" value="Find Matchs">
+					</form>
+				</div>
+			</div>
+			<div class="col my-auto">
+				<h1>It's a Match</h1>
+				<repeat group="{{ @match}}" value="{{ @user }}">
+					<div>
+						<check if="{{ @user.images }}">
+							<true>
+								<img style="max-width: 100px;min-height: 75px; border-radius: 50%;" alt="no images" src="../../ui/img_profil/{{ @user.images}}">
+							</true>
+							<false>
+								<i class="fas fa-3x fa-user-circle"></i>
+							</false>
+						</check>
+					<a href="../../profile/{{ @user.username}}">{{ @user.username }}</a></repeat>
+			</div>
+				</repeat>
+			</div>
+		</div>
+	</div>
+</header>

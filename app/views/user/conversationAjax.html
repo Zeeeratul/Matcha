@@ -1,0 +1,37 @@
+<script src="../../ui/js/conversationAjax.js"></script>
+<header class="masthead">
+<style type="text/css">
+
+    [class="{{@SESSION.uid}}"] {
+        text-align: right;
+        color: white;
+        margin: 5px;
+        padding: 0 10px;
+    }
+
+    [class="{{@info.id_dest}}"] {
+        text-align: left;
+        color: black;
+        margin: 5px;
+        padding: 0 10px;
+    }
+
+    #sendMessage {
+        text-align: center;
+    }    
+
+</style>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col my-auto">
+                <h2>Your conversation with <a href="../../profile/{{@info.username}}">{{@info.username}} ({{@info.first_name}} {{@info.last_name}})<img style="max-width: 50px; border-radius: 24px" src="../../ui/img_profil/{{@info.profile_image}}"></a></h2>
+                <div style="overflow-y: auto; max-height: 800px" id="comments"></div>
+                <br><button class="mb-2 btn btn-outline btn-xl delete" id="load">Load comments</button>
+                <form id="sendMessage" method="POST" action="../../sendMessage/{{@info.convId}}">
+                    <input id="message" type="text" name="message" maxlength="160" placeholder="Your message">
+                    <input class="mb-2 btn btn-outline btn-xl delete" type="submit" name="sendMessage">
+                </form>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,54 @@
+<header class="masthead">
+	<script src="../../ui/js/likeAjax.js"></script>
+	<div class="container h-100">
+		<div class="row h-100">
+			<div class="col-lg-7 my-auto">
+				<div class="header-content mx-auto">
+					<h1>Profile of {{ @info.username }}</h1>
+					<h3>{{@info.firstname}} {{@info.lastname}} / {{@info.gender}} {{@info.orientation}}</h3>
+
+					<check if="{{ @connected == Online}}">
+						<true><p><i class="fas fa-user-alt text-success"></i> Online</p></true>
+						<false><p><i class="fas fa-user-alt-slash text-dark"></i> {{@connected}}</p></false>
+					</check>
+
+					<check if="{{ @info.checkLike == TRUE }}">
+						<h2>{{@info.username}} like you</h2>
+					</check>
+					<check if="{{@info.img_profile != '' && @no_img_user != ''}}">
+						<check if="{{ @info.liked == TRUE}} ">
+		                    <true>                
+	                			<button class="mb-2 btn btn-outline btn-xl" id="like"><i class="fas fa-heart-broken"></i> Dislike</button>
+		                    </true>	                    
+		                    <false>                
+	                			<button class="mb-2 btn btn-outline btn-xl" id="like"><i class="fas fa-heart"></i> Like</button>
+		                    </false>
+	                	</check>
+	                </check>
+	                <br>
+					<check if="{{@info.img_profile != ''}}">
+						<img alt="No profile picture" src="../../ui/img_profil/{{ @info.img_profile }}" style="max-width: 100%">
+					</check>
+	                <br>
+
+				</div>
+			</div>
+
+			<div class="col my-auto">
+				<a href="../../signalAccount/{{ @info.username }}">Fake account ?</a>
+				<a href="../../blackListAccount/{{ @info.username }}">Block this account ?</a>
+				<h1>Pop score {{@info.popularity}}</h1>
+				<h2>{{@info.birthdate}}</h2>
+				<h2>{{@info.bio}}</h2>
+				<div class="char">
+					<repeat group="{{@info.char}}" value="{{@onechar}}">
+						<a href="../../giveCharUser/{{@onechar}}"><span>#{{@onechar}}</span></a>
+					</repeat>
+				</div>	
+				<repeat group="{{@info.img_other}}" value="{{@images}}">
+					<img style="max-width: 20%" alt="No image" src="../../ui/img_profil/{{@images}}">
+				</repeat>
+			</div>
+		</div>
+	</div>
+</header>

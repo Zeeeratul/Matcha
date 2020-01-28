@@ -1,0 +1,68 @@
+<script>
+    addEventListener(document, "touchstart", function(e) {
+        console.log(e.defaultPrevented);  // will be false
+        e.preventDefault();   // does nothing since the listener is passive
+        console.log(e.defaultPrevented);  // still false
+    }, Modernizr.passiveeventlisteners ? {passive: true} : false);
+</script>
+<style>
+    .map-container{
+        overflow:hidden;
+        padding-bottom:56.25%;
+        position:relative;
+        height:0;
+    }
+    .map-container iframe{
+        left:0;
+        top:0;
+        height:100%;
+        width:100%;
+        position:absolute;
+    }
+</style>
+<header class="masthead" style="padding-top: 50px">
+    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                style="border:0" allowfullscreen></iframe>
+    </div>
+<form name="geo" action="../../map" method="POST">
+    <input type="hidden" name="latitude" value="">
+    <input type="hidden" name="longitude" value="">
+    <input class="mb-2 btn btn-outline btn-xl js-scroll-trigger" type="submit" name="set" value="set">
+</form>
+    <script>
+
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map-container-google-1'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            }, {passive: true});
+        }
+       /* // Try HTML5 geolocation.
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                document.forms["geo"].elements["latitude"].value = pos.lat;
+                document.forms["geo"].elements["longitude"].value = pos.lng;
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('You !');
+                infoWindow.open(map);
+                map.setCenter(pos);
+
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }*/
+    </script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4G2_cUb_svStaRuXWikGcWcoyJc4PO_U&callback=initMap">
+</script>
+</header>

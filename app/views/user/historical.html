@@ -1,0 +1,31 @@
+<script src="../../ui/js/historical.js"></script>
+
+<header class="masthead">
+	<div class="container h-100">
+		<div class="row h-100">
+			<div class="col my-auto">
+				<div class="header-content mx-auto">
+					<h1>My historical</h1>
+					<repeat group="{{@info}}" value="{{@row}}">
+						<check if="{{ @row.bool == 1 }}">
+							<true>
+								<div id="{{@row.id}}">
+									<p style="color: black"><a href="../../profile/{{@row.username_visitor}}">{{@row.username_visitor}}</a>
+									{{@row.action}} at {{@row.date}}<check if="{{ @row.url_conv != '' }}"><a href="{{@row.url_conv}}"><br>Click here to respond</a></check></p>
+									<button class="mb-2 btn btn-outline btn-xl delete">Delete</button>
+								</div>
+							</true>
+							<false>
+								<div id="{{@row.id}}">
+									<p style="color: white"><a href="../../profile/{{@row.username_visitor}}">{{@row.username_visitor}}</a>
+									{{@row.action}} at {{@row.date}}<check if="{{ @row.url_conv != '' }}"><a href="{{@row.url_conv}}"><br>Click here to respond</a></check></p>
+									<button class="mb-2 btn btn-outline btn-xl delete">Delete</button>
+								</div>
+							</false>
+						</check>
+					</repeat>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

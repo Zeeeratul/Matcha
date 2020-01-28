@@ -1,0 +1,16 @@
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col my-auto">
+                <div class="header-content mx-auto">
+                    <h1>My Conversations</h1>
+                    <repeat group="{{ @conversationsList }}" value="{{ @conversation }}">
+                        <div>
+                                <a href="../../printConversationAjax/{{ @conversation.id_conversation }}">Conversation with {{@conversation.username}}</a>
+                        </div> 
+                    </repeat>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
